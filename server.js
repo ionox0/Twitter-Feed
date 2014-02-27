@@ -11,10 +11,16 @@ var T = new Twit({
 
 var data;
 
-T.get('statuses/user_timeline', { user_ID: 'ionox0', count: 10 }, function(err, reply) {
-
-    data = reply;
-    console.log(reply);
+T.get('statuses/user_timeline', { user_ID: 'rssnest', count: 10 }, function(err, reply) {
+    for (var i = 0; i < 10; i++){
+      try {
+        data += reply[i]['text'] + '/n';
+        console.log(data);
+      }
+      catch (err){
+        console.log("Not enough tweets in history");
+      }
+    }
 })
 
 app.get('/', function(req, res){
